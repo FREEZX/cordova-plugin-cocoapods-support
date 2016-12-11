@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 var path = require("path");
 var xml2js = require('xml2js');
 var commandExists = require('command-exists');
@@ -261,8 +262,8 @@ module.exports = function (context) {
 
             if (!podified) {
                 console.log('Adding schemes');
-                fs.mkdirSync(sharedDataDir);
-                fs.mkdirSync(schemesTargetDir);
+                mkdirp.sync(sharedDataDir);
+                mkdirp.sync(schemesTargetDir);
                 copyTpl(schemesSrcDir + '/CordovaLib.xcscheme', schemesTargetDir + '/CordovaLib.xcscheme', {
                     appName: appName
                 });
@@ -271,7 +272,7 @@ module.exports = function (context) {
                     appId: '1D6058900D05DD3D006BFB54'
                 });
             }
-        }
+        }   
     }
 
     function templify(str, data) {
